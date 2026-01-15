@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+@theme {
+  /* ═══════════════════════════════════════════════════════════════════════
+     LIGHT MODE - Primary Colors (From Logo)
+  ═══════════════════════════════════════════════════════════════════════ */
+  --color-primary-50: #F4F8F6;
+  --color-primary-100: #E8F0EC;
+  --color-primary-200: #C9DDD4;
+  --color-primary-300: #A9CABB;
+  --color-primary-400: #8AAFA0;
+  --color-primary-500: #7AA598;
+  --color-primary-600: #5D8878;
+  --color-primary-700: #4A6D60;
+  --color-primary-800: #385248;
+  --color-primary-900: #263730;
+  
+  /* Accent Colors - Terracotta */
+  --color-accent-50: #FDF8F6;
+  --color-accent-100: #FAEDE8;
+  --color-accent-200: #F3D7CD;
+  --color-accent-300: #E8C0B1;
+  --color-accent-400: #D4A294;
+  --color-accent-500: #C48D7B;
+  --color-accent-600: #A77162;
+  --color-accent-700: #8A5A4D;
+  --color-accent-800: #6D4439;
+  --color-accent-900: #502E26;
+  
+  /* Sage Neutrals */
+  --color-sage-50: #F4F8F6;
+  --color-sage-100: #E8F0EC;
+  --color-sage-200: #DCE7E2;
+  --color-sage-300: #C5D6CE;
+  --color-sage-400: #A8C0B5;
+  --color-sage-500: #8F9A96;
+  --color-sage-600: #5A6662;
+  --color-sage-700: #3A4440;
+  --color-sage-800: #1F2421;
+  --color-sage-900: #121614;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     LIGHT MODE (Default)
+  ═══════════════════════════════════════════════════════════════════════ */
+  body {
+    /* System fonts - كلها تدعم عربي وموجودة في Windows/Mac */
+    font-family: 'Segoe UI', 'Tahoma', 'Arial', 'Helvetica Neue', sans-serif;
+    direction: rtl;
+    line-height: 1.7;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    /* Light Mode Colors */
+    background-color: #FFFFFF;
+    color: #1F2421;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  ::selection {
+    background: #7AA598;
+    color: #FFFFFF;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     DARK MODE
+  ═══════════════════════════════════════════════════════════════════════ */
+  .dark body,
+  html.dark body {
+    background-color: #1A1A1A;
+    color: #F4F8F6;
+  }
+
+  .dark ::selection,
+  html.dark ::selection {
+    background: #9CBDB1;
+    color: #1A1A1A;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   CUSTOM UTILITY CLASSES FOR THEMING
+═══════════════════════════════════════════════════════════════════════ */
+
+/* Background colors */
+.bg-theme {
+  background-color: #FFFFFF;
+}
+.dark .bg-theme {
+  background-color: #1A1A1A;
+}
+
+.bg-theme-secondary {
+  background-color: #F4F8F6;
+}
+.dark .bg-theme-secondary {
+  background-color: #242928;
+}
+
+.bg-theme-card {
+  background-color: #FFFFFF;
+}
+.dark .bg-theme-card {
+  background-color: #242928;
+}
+
+/* Text colors */
+.text-theme {
+  color: #1F2421;
+}
+.dark .text-theme {
+  color: #F4F8F6;
+}
+
+.text-theme-secondary {
+  color: #5A6662;
+}
+.dark .text-theme-secondary {
+  color: #B8C7C2;
+}
+
+.text-theme-muted {
+  color: #8F9A96;
+}
+.dark .text-theme-muted {
+  color: #8F9A96;
+}
+
+/* Border colors */
+.border-theme {
+  border-color: #DCE7E2;
+}
+.dark .border-theme {
+  border-color: #3A4440;
+}
+
+/* Primary colors (adjusted for dark mode) */
+.text-primary-theme {
+  color: #7AA598;
+}
+.dark .text-primary-theme {
+  color: #9CBDB1;
+}
+
+.bg-primary-theme {
+  background-color: #7AA598;
+}
+.dark .bg-primary-theme {
+  background-color: #9CBDB1;
+}
+
+/* Accent colors (adjusted for dark mode) */
+.text-accent-theme {
+  color: #D4A294;
+}
+.dark .text-accent-theme {
+  color: #E8B8A8;
+}
+
+.bg-accent-theme {
+  background-color: #D4A294;
+}
+.dark .bg-accent-theme {
+  background-color: #E8B8A8;
+}
