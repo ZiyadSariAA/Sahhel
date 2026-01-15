@@ -71,7 +71,7 @@ exports.sendThankYouEmail = functions
     }
 
     const mailOptions = {
-      from: 'سهّل Sahhel <nasabnihelp@gmail.com>',
+      from: 'سهّل | Sahhel <nasabnihelp@gmail.com>',
       to: email,
       subject: 'شكراً لك! 🙏',
       html: `
@@ -219,7 +219,7 @@ exports.createUserDocument = functions
       const displayName = user.displayName || 'المستخدم';
       
       const welcomeMailOptions = {
-        from: 'سهّل Sahhel <nasabnihelp@gmail.com>',
+        from: 'سهّل | Sahhel <nasabnihelp@gmail.com>',
         to: user.email,
         subject: 'مرحباً بك في سهّل! 🎉',
         html: `
