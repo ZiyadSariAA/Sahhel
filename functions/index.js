@@ -40,7 +40,9 @@ const getEmailTransporter = () => {
 // 1. إرسال إيميل شكر (HTTP Function - يستدعى من الموقع)
 // ═══════════════════════════════════════════════════════════════════════════
 
-exports.sendThankYouEmail = functions.https.onRequest((request, response) => {
+exports.sendThankYouEmail = functions
+  .runWith({ secrets: ["EMAIL_USER", "EMAIL_PASS"] })
+  .https.onRequest((request, response) => {
   return cors(request, response, async () => {
     if (request.method !== 'POST') {
       response.status(405).json({ error: 'Method not allowed' });
@@ -69,7 +71,7 @@ exports.sendThankYouEmail = functions.https.onRequest((request, response) => {
     }
 
     const mailOptions = {
-      from: 'سهّل <noreply@sahhel.com>',
+      from: 'سهّل Sahhel <nasabnihelp@gmail.com>',
       to: email,
       subject: 'شكراً لك! 🙏',
       html: `
@@ -167,7 +169,9 @@ exports.sendThankYouEmail = functions.https.onRequest((request, response) => {
 // 2. إنشاء مستند المستخدم في Firestore عند التسجيل
 // ═══════════════════════════════════════════════════════════════════════════
 
-exports.createUserDocument = functions.auth.user().onCreate(async (user) => {
+exports.createUserDocument = functions
+  .runWith({ secrets: ["EMAIL_USER", "EMAIL_PASS"] })
+  .auth.user().onCreate(async (user) => {
   console.log(`📝 Creating user document for: ${user.uid}`);
   
   try {
@@ -215,7 +219,7 @@ exports.createUserDocument = functions.auth.user().onCreate(async (user) => {
       const displayName = user.displayName || 'المستخدم';
       
       const welcomeMailOptions = {
-        from: 'سهّل <noreply@sahhel.com>',
+        from: 'سهّل Sahhel <nasabnihelp@gmail.com>',
         to: user.email,
         subject: 'مرحباً بك في سهّل! 🎉',
         html: `
