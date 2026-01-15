@@ -81,66 +81,181 @@ exports.sendThankYouEmail = functions
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <style>
+            * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+            }
             body {
               font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-              line-height: 1.6;
-              color: #333;
+              line-height: 1.8;
+              color: #1F2421;
+              background: linear-gradient(135deg, #F4F8F6 0%, #E8F0EC 100%);
+              padding: 20px;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+            }
+            .email-wrapper {
               max-width: 600px;
               margin: 0 auto;
-              padding: 20px;
-              background-color: #f4f8f6;
             }
             .container {
               background-color: #ffffff;
-              border-radius: 12px;
-              padding: 30px;
-              box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+              border-radius: 20px;
+              overflow: hidden;
+              box-shadow: 0 8px 24px rgba(31, 36, 33, 0.08);
             }
             .header {
+              background: linear-gradient(135deg, #7AA598 0%, #5a8a7d 100%);
+              padding: 40px 30px;
               text-align: center;
-              margin-bottom: 30px;
+              color: #ffffff;
             }
             .logo {
-              font-size: 32px;
+              font-size: 42px;
               font-weight: bold;
-              color: #7AA598;
-              margin-bottom: 10px;
+              margin-bottom: 15px;
+              letter-spacing: 2px;
+            }
+            .logo-subtitle {
+              font-size: 16px;
+              opacity: 0.95;
+              font-weight: 300;
+            }
+            .content-wrapper {
+              padding: 40px 30px;
+            }
+            .icon-wrapper {
+              text-align: center;
+              margin-bottom: 25px;
+            }
+            .icon-emoji {
+              font-size: 64px;
+              display: inline-block;
+              animation: bounce 2s infinite;
+            }
+            @keyframes bounce {
+              0%, 100% { transform: translateY(0); }
+              50% { transform: translateY(-10px); }
             }
             h1 {
               color: #1F2421;
+              font-size: 28px;
               margin-bottom: 20px;
+              text-align: center;
+              font-weight: 600;
             }
             .content {
-              margin: 20px 0;
+              margin: 25px 0;
               text-align: center;
             }
+            .content p {
+              margin: 15px 0;
+              font-size: 16px;
+              color: #5A6662;
+              line-height: 1.8;
+            }
+            .content strong {
+              color: #7AA598;
+              font-weight: 600;
+            }
+            .highlight-box {
+              background: linear-gradient(135deg, #F4F8F6 0%, #E8F0EC 100%);
+              border-right: 4px solid #7AA598;
+              border-radius: 12px;
+              padding: 25px;
+              margin: 30px 0;
+              text-align: right;
+            }
+            .highlight-box p {
+              color: #1F2421;
+              font-size: 16px;
+              margin: 0;
+            }
+            .cta-button {
+              display: inline-block;
+              background: linear-gradient(135deg, #7AA598 0%, #5a8a7d 100%);
+              color: #ffffff !important;
+              padding: 16px 40px;
+              border-radius: 30px;
+              text-decoration: none;
+              font-weight: 600;
+              font-size: 16px;
+              margin: 25px 0;
+              box-shadow: 0 4px 12px rgba(122, 165, 152, 0.3);
+              transition: all 0.3s ease;
+            }
+            .cta-button:hover {
+              transform: translateY(-2px);
+              box-shadow: 0 6px 16px rgba(122, 165, 152, 0.4);
+            }
             .footer {
-              margin-top: 30px;
-              padding-top: 20px;
-              border-top: 1px solid #e8f0ec;
+              background-color: #F4F8F6;
+              padding: 30px;
               text-align: center;
+              border-top: 1px solid #DCE7E2;
+            }
+            .footer p {
               color: #8F9A96;
               font-size: 14px;
+              margin: 8px 0;
+            }
+            .footer-brand {
+              color: #7AA598;
+              font-weight: 600;
+              font-size: 16px;
+            }
+            @media only screen and (max-width: 600px) {
+              .header {
+                padding: 30px 20px;
+              }
+              .content-wrapper {
+                padding: 30px 20px;
+              }
+              .logo {
+                font-size: 36px;
+              }
+              h1 {
+                font-size: 24px;
+              }
             }
           </style>
         </head>
         <body>
-          <div class="container">
-            <div class="header">
-              <div class="logo">سهّل</div>
-              <h1>شكراً لك! 🙏</h1>
-            </div>
-            
-            <div class="content">
-              <p>${name ? `عزيزي/عزيزتي ${name},` : 'عزيزي المستخدم،'}</p>
-              <p>نشكرك على استخدام <strong>سهّل</strong>!</p>
-              <p>نتمنى أن تكون تجربتك معنا ممتعة ومفيدة.</p>
-              <p>إذا كان لديك أي اقتراحات أو استفسارات، نحن هنا لمساعدتك.</p>
-            </div>
-            
-            <div class="footer">
-              <p>مع تحيات فريق سهّل</p>
-              <p>نتمنى لك رحلة تعليمية ممتعة! 🎓</p>
+          <div class="email-wrapper">
+            <div class="container">
+              <div class="header">
+                <div class="logo">سهّل | Sahhel</div>
+                <div class="logo-subtitle">منصة التعلم الذكية</div>
+              </div>
+              
+              <div class="content-wrapper">
+                <div class="icon-wrapper">
+                  <div class="icon-emoji">🙏</div>
+                </div>
+                
+                <h1>شكراً لك!</h1>
+                
+                <div class="content">
+                  <p>${name ? `عزيزي/عزيزتي <strong>${name}</strong>,` : 'عزيزي المستخدم،'}</p>
+                  <p>نشكرك على استخدام <strong>سهّل</strong>!</p>
+                  <p>نتمنى أن تكون تجربتك معنا ممتعة ومفيدة.</p>
+                </div>
+                
+                <div class="highlight-box">
+                  <p>💡 إذا كان لديك أي اقتراحات أو استفسارات، نحن هنا لمساعدتك دائماً.</p>
+                </div>
+                
+                <div style="text-align: center;">
+                  <a href="https://sahhel-org.web.app" class="cta-button" style="color: #ffffff;">زيارة الموقع</a>
+                </div>
+              </div>
+              
+              <div class="footer">
+                <p class="footer-brand">سهّل | Sahhel</p>
+                <p>نتمنى لك رحلة تعليمية ممتعة! 🎓</p>
+                <p style="margin-top: 15px; font-size: 12px; color: #8F9A96;">© 2026 سهّل. جميع الحقوق محفوظة.</p>
+              </div>
             </div>
           </div>
         </body>
@@ -229,58 +344,105 @@ exports.createUserDocument = functions
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <style>
+              * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+              }
               body {
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                 line-height: 1.8;
-                color: #333;
+                color: #1F2421;
+                background: linear-gradient(135deg, #F4F8F6 0%, #E8F0EC 100%);
+                padding: 20px;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+              }
+              .email-wrapper {
                 max-width: 600px;
                 margin: 0 auto;
-                padding: 20px;
-                background-color: #f4f8f6;
               }
               .container {
                 background-color: #ffffff;
-                border-radius: 16px;
-                padding: 40px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                border-radius: 20px;
+                overflow: hidden;
+                box-shadow: 0 8px 24px rgba(31, 36, 33, 0.08);
               }
               .header {
+                background: linear-gradient(135deg, #7AA598 0%, #5a8a7d 100%);
+                padding: 50px 30px;
                 text-align: center;
-                margin-bottom: 30px;
+                color: #ffffff;
+                position: relative;
+              }
+              .header::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 20px;
+                background: linear-gradient(to bottom, rgba(255,255,255,0.1), transparent);
               }
               .logo {
                 font-size: 42px;
                 font-weight: bold;
-                color: #7AA598;
-                margin-bottom: 10px;
+                margin-bottom: 15px;
+                letter-spacing: 2px;
+              }
+              .logo-subtitle {
+                font-size: 16px;
+                opacity: 0.95;
+                font-weight: 300;
+              }
+              .welcome-icon {
+                font-size: 80px;
+                margin-bottom: 20px;
+                display: inline-block;
+                animation: bounce 2s infinite;
+              }
+              @keyframes bounce {
+                0%, 100% { transform: translateY(0) scale(1); }
+                50% { transform: translateY(-15px) scale(1.1); }
+              }
+              .content-wrapper {
+                padding: 40px 30px;
               }
               h1 {
                 color: #1F2421;
-                margin-bottom: 20px;
-                font-size: 28px;
-              }
-              .welcome-icon {
-                font-size: 60px;
-                margin-bottom: 20px;
+                font-size: 32px;
+                margin-bottom: 25px;
+                text-align: center;
+                font-weight: 600;
               }
               .content {
-                margin: 20px 0;
+                margin: 25px 0;
                 text-align: center;
               }
               .content p {
                 margin: 15px 0;
-                font-size: 16px;
+                font-size: 18px;
+                color: #5A6662;
+                line-height: 1.8;
+              }
+              .content strong {
+                color: #7AA598;
+                font-weight: 600;
               }
               .features {
-                background-color: #f8faf9;
-                border-radius: 12px;
-                padding: 25px;
-                margin: 25px 0;
+                background: linear-gradient(135deg, #F4F8F6 0%, #E8F0EC 100%);
+                border-right: 4px solid #7AA598;
+                border-radius: 16px;
+                padding: 30px;
+                margin: 35px 0;
                 text-align: right;
               }
               .features h3 {
-                color: #7AA598;
-                margin-bottom: 15px;
+                color: #1F2421;
+                font-size: 22px;
+                margin-bottom: 20px;
+                font-weight: 600;
+                text-align: right;
               }
               .features ul {
                 list-style: none;
@@ -288,8 +450,11 @@ exports.createUserDocument = functions
                 margin: 0;
               }
               .features li {
-                padding: 8px 0;
-                border-bottom: 1px solid #e8f0ec;
+                padding: 12px 0;
+                border-bottom: 1px solid #DCE7E2;
+                font-size: 16px;
+                color: #5A6662;
+                transition: all 0.3s ease;
               }
               .features li:last-child {
                 border-bottom: none;
@@ -298,58 +463,106 @@ exports.createUserDocument = functions
                 content: '✓ ';
                 color: #7AA598;
                 font-weight: bold;
+                font-size: 18px;
+                margin-left: 10px;
+              }
+              .features li:hover {
+                color: #1F2421;
+                padding-right: 10px;
               }
               .cta-button {
                 display: inline-block;
                 background: linear-gradient(135deg, #7AA598 0%, #5a8a7d 100%);
-                color: white;
-                padding: 15px 40px;
+                color: #ffffff !important;
+                padding: 18px 45px;
                 border-radius: 30px;
                 text-decoration: none;
-                font-weight: bold;
+                font-weight: 600;
                 font-size: 18px;
-                margin: 20px 0;
+                margin: 30px 0;
+                box-shadow: 0 4px 12px rgba(122, 165, 152, 0.3);
+                transition: all 0.3s ease;
+              }
+              .cta-button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(122, 165, 152, 0.4);
               }
               .footer {
-                margin-top: 30px;
-                padding-top: 20px;
-                border-top: 1px solid #e8f0ec;
+                background-color: #F4F8F6;
+                padding: 30px;
                 text-align: center;
+                border-top: 1px solid #DCE7E2;
+              }
+              .footer p {
                 color: #8F9A96;
                 font-size: 14px;
+                margin: 8px 0;
+              }
+              .footer-brand {
+                color: #7AA598;
+                font-weight: 600;
+                font-size: 16px;
+              }
+              @media only screen and (max-width: 600px) {
+                .header {
+                  padding: 40px 20px;
+                }
+                .content-wrapper {
+                  padding: 30px 20px;
+                }
+                .logo {
+                  font-size: 36px;
+                }
+                h1 {
+                  font-size: 26px;
+                }
+                .welcome-icon {
+                  font-size: 60px;
+                }
+                .features {
+                  padding: 20px;
+                }
               }
             </style>
           </head>
           <body>
-            <div class="container">
-              <div class="header">
-                <div class="welcome-icon">🎉</div>
-                <div class="logo">سهّل</div>
-                <h1>مرحباً بك، ${displayName}!</h1>
-              </div>
-              
-              <div class="content">
-                <p>نحن سعداء جداً بانضمامك إلى <strong>سهّل</strong>!</p>
-                <p>منصتك المثالية للتعلم والتركيز والإنتاجية.</p>
-              </div>
-              
-              <div class="features">
-                <h3>ماذا يمكنك فعله مع سهّل؟</h3>
-                <ul>
-                  <li>استعراض الدورات والمواد التعليمية</li>
-                  <li>استخدام مركز التركيز مع مؤقت بومودورو</li>
-                  <li>إدارة مهامك اليومية بكفاءة</li>
-                  <li>اختبار نفسك وتتبع تقدمك</li>
-                </ul>
-              </div>
-              
-              <div class="content">
-                <p>ابدأ رحلتك التعليمية الآن!</p>
-              </div>
-              
-              <div class="footer">
-                <p>مع تحيات فريق سهّل 💚</p>
-                <p>إذا كان لديك أي استفسار، لا تتردد في التواصل معنا.</p>
+            <div class="email-wrapper">
+              <div class="container">
+                <div class="header">
+                  <div class="welcome-icon">🎉</div>
+                  <div class="logo">سهّل | Sahhel</div>
+                  <div class="logo-subtitle">منصة التعلم الذكية</div>
+                </div>
+                
+                <div class="content-wrapper">
+                  <h1>مرحباً بك، ${displayName}!</h1>
+                  
+                  <div class="content">
+                    <p>نحن <strong>سعداء جداً</strong> بانضمامك إلى <strong>سهّل</strong>!</p>
+                    <p>منصتك المثالية للتعلم والتركيز والإنتاجية.</p>
+                  </div>
+                  
+                  <div class="features">
+                    <h3>✨ ماذا يمكنك فعله مع سهّل؟</h3>
+                    <ul>
+                      <li>استعراض الدورات والمواد التعليمية</li>
+                      <li>استخدام مركز التركيز مع مؤقت بومودورو</li>
+                      <li>إدارة مهامك اليومية بكفاءة</li>
+                      <li>اختبار نفسك وتتبع تقدمك</li>
+                    </ul>
+                  </div>
+                  
+                  <div style="text-align: center;">
+                    <a href="https://sahhel-org.web.app" class="cta-button" style="color: #ffffff;">ابدأ رحلتك التعليمية الآن</a>
+                  </div>
+                </div>
+                
+                <div class="footer">
+                  <p class="footer-brand">سهّل | Sahhel</p>
+                  <p>💚 مع تحيات فريق سهّل</p>
+                  <p>إذا كان لديك أي استفسار، لا تتردد في التواصل معنا.</p>
+                  <p style="margin-top: 15px; font-size: 12px; color: #8F9A96;">© 2026 سهّل. جميع الحقوق محفوظة.</p>
+                </div>
               </div>
             </div>
           </body>
